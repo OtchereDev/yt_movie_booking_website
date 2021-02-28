@@ -12,10 +12,11 @@
     <div class="movie-container">
       <label>Pick a movie:</label>
       <select id="movie">
-        <option value="10">Avengers: Endgame ($10)</option>
-        <option value="12">Joker ($12)</option>
-        <option value="8">Toy Story 4 ($8)</option>
-        <option value="9">The Lion King ($9)</option>
+      {% for movie in movies %}
+        <option id="{{movie.title}}" {% if forloop.counter == 0 %} selected {% endif %} value="{{movie.price}}">{{movie.title}} (${{movie.price}})</option>
+      {% endfor %}
+        
+        
       </select>
     </div>
 
@@ -106,6 +107,11 @@
       >
     </p>
 
+    <div class='cta'>
+      <button class='purchase_btn'>Purchase Your Tickets</button>
+    </div>
+
     <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'backend.js' %}"></script>
   </body>
 </html>

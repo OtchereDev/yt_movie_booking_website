@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1","localhost","0.0.0.0","movies-dj.herokuapp.com"]
 
 
 # Application definition
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'movies.apps.MoviesConfig',
+    "whitenoise.runserver.nostatic",
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'movieWebsite.urls'
@@ -129,3 +132,29 @@ STATICFILES_DIRS=[
     BASE_DIR/'static',
 ]
 
+
+# payment 
+PAYSTACK_SECRET=os.environ.get("PAYSTACK_SECRET")
+PAYSTACK_IP=["52.31.139.75", "52.49.173.169", "52.214.14.220"]
+
+
+# email config
+
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT=587
+
+EMAIL_HOST_USER=os.environ.get("EMAIL_USER")
+EMAIL_HOST_PASSWORD=os.environ.get("EMAIL_PASSWORD")
+
+EMAIL_USE_TLS=True
+
+
+# website config
+HOST_URL="https://abb54db7fcc2.ngrok.io"
+
+
+# heroku config
+STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
+db_from_env=dj_database_url.config(conn_max_age=600)
+DATABASES["default"].update(db_from_env)

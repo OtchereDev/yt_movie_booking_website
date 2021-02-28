@@ -1,0 +1,9 @@
+django
+gunicorn
+whitenoise
+dj-database-url
+psycopg2
+django-ipware
+requests
+celery
+redis
