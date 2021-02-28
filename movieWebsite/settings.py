@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'movies.apps.MoviesConfig',
-    "whitenoise.runserver.nostatic",
+    "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
