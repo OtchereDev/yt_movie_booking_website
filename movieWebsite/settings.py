@@ -151,7 +151,7 @@ EMAIL_USE_TLS=True
 
 
 # website config
-HOST_URL="https://movies-dj.herokuapp.com/"
+HOST_URL="https://movies-dj.herokuapp.com"
 
 
 # heroku config
